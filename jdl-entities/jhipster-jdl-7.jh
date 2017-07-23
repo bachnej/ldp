@@ -1,0 +1,23 @@
+
+entity Task {
+	title String,
+	description String
+}
+entity User {
+	firstName String,
+	lastName String,
+	email String,
+	phoneNumber String,
+	city String
+}
+entity Skill {
+	skillTitle String,
+	minSalary Long,
+	maxSalary Long
+}
+relationship ManyToMany {
+	Skill{task(title)} to Task{skill}
+}
+
+dto * with mapstruct
+angularSuffix * with angularui

@@ -1,0 +1,46 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="mySkillLabel" jhiTranslate="lpbApp.skill.home.createOrEditLabel">Create or edit a Skill</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!skill.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="skill.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="lpbApp.skill.skillTitle" for="field_skillTitle">Skill Title</label>
+            <input type="text" class="form-control" name="skillTitle" id="field_skillTitle"
+                [(ngModel)]="skill.skillTitle"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="lpbApp.skill.minSalary" for="field_minSalary">Min Salary</label>
+            <input type="number" class="form-control" name="minSalary" id="field_minSalary"
+                [(ngModel)]="skill.minSalary"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="lpbApp.skill.maxSalary" for="field_maxSalary">Max Salary</label>
+            <input type="number" class="form-control" name="maxSalary" id="field_maxSalary"
+                [(ngModel)]="skill.maxSalary"  />
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="lpbApp.skill.task" for="field_task">Task</label>
+            <select class="form-control" id="field_task" multiple name="task" [(ngModel)]="skill.tasks">
+                <option [ngValue]="getSelected(skill.tasks, taskOption)" *ngFor="let taskOption of tasks; trackBy: trackTaskById">{{taskOption.title}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
